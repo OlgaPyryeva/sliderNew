@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+
+    <style>
+        section {
+        width: 550px;
+        height: 400px;
+        margin: auto; 
+        transition: .3s;    
+        }
+
+        section:hover {
+            filter: brightness(80%);
+        }
+
+        .material-icons {
+            font-size: 70px;
+            color: #fff;
+            /* border: 1px solid blueviolet; */
+            transition: .3s;
+        }
+
+        .material-icons:hover, a:hover { color: aqua; }
+
+        div {
+            /* border: 1px solid blueviolet; */
+            width: 70px;
+            position: relative; 
+            cursor: pointer;        
+        }
+
+        #before {
+            top: -250px;
+        }
+
+        #next {
+            top: -325px;
+            left: 478px;
+        }
+
+        article {
+            /* border: 1px solid blueviolet; */
+            height: 100px;
+            background: rgba(23, 168, 168, 0.699);
+            color: #fff;
+            position: relative;
+            top: -270px;
+        }
+
+        h1, p {
+            padding-left: 15px;
+        }
+
+        h1 {
+            padding-top: 10px; 
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        h2 {
+            position: relative;
+            top: -350px;
+            left: 15px;
+            border: 1px solid #fff;
+            width: fit-content;
+            text-align: center;
+            padding: 0 5px;
+        }
+
+    </style>
+
+
+</head>
+<body onload="timerId = setTimeout('changePic()', 2000)">
+    
+<section onmouseover="clearTimeout(timerId)" onmouseout="timerId = setTimeout('changePic()', 2000)">
+        <a id="hr" target="_blank" href="https://www.google.com/"> <img src="images/img1b.jpg" id="pic"></a>
+
+<div id="before"><span class="material-icons">navigate_before</span></div>
+
+<div id="next"><span class="material-icons">navigate_next</span></div>
+
+<article>
+    <h1 id="t1">Заголовок слайда 1</h1>
+    <p id="t2"><a href="link1.html">Подзаголовок слайда 1</a></p>
+    <h2 id="t3"><a href="https://www.google.com/">www.google.com</a></h2>
+</article>
+
+
+    </section>
+    <script>
+let i = 0, p = 5;
+        let to = [
+			{
+				webSite: 'https://www.google.com/',
+				title: 'заголовок слайда 1',
+				subtitle: 'подзаголовок слайда 1',
+				img:'images/img1b.jpg',
+				link:'link1.html',
+			},
+			{
+				webSite: 'https://yandex.by/',
+				title: 'заголовок слайда 2',
+				subtitle: 'подзаголовок слайда 2',
+				img:'images/img2b.jpg',
+				link:'link2.html',
+			},
+			{
+				webSite: 'https://mail.ru/',
+				title: 'заголовок слайда 3',
+				subtitle: 'подзаголовок слайда 3',
+				img:'images/img3b.jpg',
+				link:'link3.html',
+			},
+			{
+				webSite: 'https://vk.com/',
+				title: 'заголовок слайда 4',
+				subtitle: 'подзаголовок слайда 4',
+				img:'images/img4b.jpg',
+				link:'link4.html',
+			},
+			{
+				webSite: 'https://ok.ru/',
+				title: 'заголовок слайда 5',
+				subtitle: 'подзаголовок слайда 5',
+				img:'images/img5b.jpg',
+				link:'link5.html',
+			},
+			{
+				webSite: 'https://www.facebook.com/',
+				title: 'заголовок слайда 6',
+				subtitle: 'подзаголовок слайда 6',
+				img:'images/img6b.jpg',
+				link:'link6.html',
+			},
+			
+		];
+       
+   
+        let to1 = [], start, finish, result;
+
+        for (j=0; j<to.length; j++) {
+        start =  to[j].webSite.indexOf(':',0) + 3;
+        finish = to[j].webSite.length - 1;
+        result = to[j].webSite.substring(start, finish);    
+        to1[j] = result;
+        }
+
+//         console.log(to, to1);
+
+        function changePic() {
+            func_next();
+            timerId = setTimeout(changePic, 2000);
+        }
+
+        function func_next() {
+        if (++i > p) i = 0;
+        change();
+
+        }
+
+        function func_before() {
+            if (--i < 0) i = 5;
+            change();
+        }
+
+        function change() {
+        hr.href = to[i].webSite;
+        pic.src = to[i].img;
+        t1.innerHTML = to[i].title;
+        t2.innerHTML = `<a href="${to[i].link}"> ${to[i].subtitle} </a>`;
+        t3.innerHTML = `<a href="${to[i].link}"> ${to1[i]} </a>`;
+        }
+
+
+next.addEventListener('click', func_next); 
+before.addEventListener('click', func_before); 
+
+   
+
+
+    </script>
+
+</body>
+</html>
